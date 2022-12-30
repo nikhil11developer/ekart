@@ -18,13 +18,18 @@ const SingleProduct = ({ prod }) => {
                         <span>{prod.price}</span>
                         {prod.fastDelivery ? (<div>Fast Delivery</div>) : (<div>In 4 days</div>)}
                     </Card.Subtitle>
+                    
+                    {cart.some((p) => p.id === prod.id) ? (
+                        <Button variant="danger" onClick={() => {
 
-                    <Button variant="primary" onClick={() => { dispatch({ type: 'ADD_TO_CART', payload: prod }); }}>
-                        Add to cart</Button>{'  '}
-                    <Button variant="danger" onClick={() => {
+                            dispatch({ type: 'REMOVE_FROM_CART', payload: prod.id })
+                        }}>Remove from cart</Button>
+                    ) : (
+                        <Button  disabled={prod.inStock==1} variant={prod.inStock==1?'warning':'primary'} onClick={() => { dispatch({ type: 'ADD_TO_CART', payload: prod }); }}>
+                            {prod.inStock==1?'Out of Stock':'Add to Cart'}</Button>    
+                    )}
 
-                        dispatch({ type: 'REMOVE_FROM_CART', payload: prod.id })
-                    }}>Remove from cart</Button>{'  '}
+                    {'  '}
                 </Card.Body>
             </Card>
         </div>

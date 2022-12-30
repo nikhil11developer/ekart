@@ -7,7 +7,7 @@ import './styles.css'
 
 const Home = () => {
     const data = useContext(Context)
-    console.log('printing '+{...data.state})
+    
     return (
         <div className='home'>
             <Filter />
